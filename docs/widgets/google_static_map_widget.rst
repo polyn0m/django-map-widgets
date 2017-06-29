@@ -1,31 +1,21 @@
-Google Map Static Overlay Widget
-================================
+Google Map Static Widget
+========================
 
 **Preview**
 
-.. image:: ../_static/images/google-point-static-overlay-map-widget.png
+.. image:: ../_static/images/google-point-static-map-widget.png
 
-This widget is working with `Magnific Popup <http://dimsemenov.com/plugins/magnific-popup/>`_  jQuery plugin.
+Django map widgets provide all Google Static Map API features. Check out this `link <https://developers.google.com/maps/documentation/static-maps/intro>`_ for the google static map API features.
 
-**Usage**
+Here is the all default settings attribute for google static map widget.
 
-You can use also all static map features in this widget. Besides you can give a thumbnail_size value.
-
-Here is the all default settings attribute for google static overlay map widget.
 
 .. code-block:: python
 
     MAP_WIDGETS = {
-        "GoogleStaticMapMarkerSettings": (
-            ("size", "normal"),
-            ("color", ""),
-            ("icon", ""),
-        ),
-
-        "GoogleStaticOverlayMapWidget": (
+        "GoogleStaticMapWidget": (
             ("zoom", 15),
             ("size", "480x480"),
-            ("thumbnail_size", "160x160"),
             ("scale", ""),
             ("format", ""),
             ("maptype", ""),
@@ -36,13 +26,22 @@ Here is the all default settings attribute for google static overlay map widget.
             ("region", "")
         ),
 
+        "GoogleStaticMapMarkerSettings": (
+            ("size", "normal"),
+            ("color", ""),
+            ("icon", ""),
+        )
         "GOOGLE_MAP_API_SIGNATURE": "",
         "GOOGLE_MAP_API_KEY": "",
     }
 
+**Usage**
+
+If you are not using specific features on Google Static Map API, you just need to update GOOGLE_MAP_API_KEY value in your Django settings file. If you also need individual size map images, you can pass `size` and `zoom` parameter for each GoogleStaticMapWidget class.
+
 **Settings**
 
-In your django ``settings.py`` file, add your ``MAP_WIDGETS`` config:
+In your ``settings.py`` file, add your ``MAP_WIDGETS`` config:
 
 .. code-block:: python
 

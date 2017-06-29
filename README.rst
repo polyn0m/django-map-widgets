@@ -1,3 +1,15 @@
+.. image:: https://coveralls.io/repos/github/erdem/django-map-widgets/badge.svg?branch=master
+    :target: https://coveralls.io/github/erdem/django-map-widgets?branch=master
+    :alt: Coverage Status
+
+.. image:: https://travis-ci.org/erdem/django-map-widgets.png
+    :target: https://travis-ci.org/erdem/django-map-widgets
+    :alt: Build Status
+
+.. image:: https://badge.fury.io/py/django-map-widgets.svg
+    :target: https://badge.fury.io/py/django-map-widgets
+    :alt: Latest PyPI version
+
 Django Map Widgets
 ==================
 
@@ -19,7 +31,7 @@ Installation
 
     $ pip install django-map-widgets
 
-Add 'map_widgets' to your `INSTALLED_APPS` in settings.py
+Add ``map_widgets`` to your ``INSTALLED_APPS`` in settings.py
 
 .. code-block:: python
 
@@ -31,6 +43,36 @@ Add 'map_widgets' to your `INSTALLED_APPS` in settings.py
 
         'mapwidgets',
     ]
+
+**Django Admin**
+
+.. code-block:: python
+    from django.contrib.gis.db import models
+    from mapwidgets.widgets import GooglePointFieldWidget
+
+
+    class CityAdmin(admin.ModelAdmin):
+        formfield_overrides = {
+            models.PointField: {"widget": GooglePointFieldWidget}
+        }
+
+
+**Django Forms**
+
+.. code-block:: python
+
+    from mapwidgets.widgets import GooglePointFieldWidget, GoogleStaticOverlayMapWidget
+
+
+    class CityForm(forms.ModelForm):
+
+        class Meta:
+            model = City
+            fields = ("coordinates", "city_hall")
+            widgets = {
+                'coordinates': GooglePointFieldWidget,
+                'city_hall': GoogleStaticOverlayMapWidget,
+            }
 
 
 Requirements
@@ -44,14 +86,9 @@ Screenshots
 Google Map Point Field Widget
 -----------------------------
 
-.. image:: https://cloud.githubusercontent.com/assets/1518272/18732352/724dd098-805a-11e6-8eb4-6ba9b5e06a81.png
+.. image:: https://cloud.githubusercontent.com/assets/1518272/26807500/ad0af4ea-4a4e-11e7-87d6-632f39e438f7.gif
    :width: 100 %
 
-
-Google Map Point Field Widget for Django Admin Inlines
-------------------------------------------------------
-
-.. image:: https://cloud.githubusercontent.com/assets/1518272/18221609/2cac10fe-7178-11e6-9990-a93176693ef7.gif
 
 Google Map Static Overlay Widget
 --------------------------------
@@ -59,3 +96,31 @@ Google Map Static Overlay Widget
 .. image:: https://cloud.githubusercontent.com/assets/1518272/18732296/18f1813e-805a-11e6-8801-f1f48ed02a9c.png
    :width: 100 %
 
+
+Release Notes
+^^^^^^^^^^^^^
+
+======
+v0.1.9
+======
+
+ * Google Place Autocomplete object binding to jQuery triggers.
+ * Implemented Google Geocoding support for the marker coordinates.
+ * Added custom widget settings feature for each widget.
+ * Added Portuguese localisation support.
+ * Fixed Google Place Autocomplete widget bugs in Django Admin Inlines.
+ * Fixed Python 3.6 errors.
+ * Fixed Javascript bugs.
+ * The GitHub repository Integrated with Travis CI.
+ * Implemented unit tests for backend code. (%100 code coverage)
+ * Change development environment from Vagrant to Docker.
+
+======
+v0.1.8
+======
+
+ * Full documentation integrated to readthedocs.org.
+ * Fixed Google Map static widget issues.
+ * Added Russian localisation support.
+ * Added `Google Places Autocomplete <https://developers.google.com/maps/documentation/javascript/places-autocomplete>`_ options support.
+ * Fixed CSS issues.
