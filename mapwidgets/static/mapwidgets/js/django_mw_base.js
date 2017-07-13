@@ -72,13 +72,13 @@
 	                    var placeObj = results[0] || {};
 	                    $(this.addressAutoCompleteInput).val(placeObj.formatted_address || "");
 	                    $(document).trigger(this.placeChangedTriggerNameSpace,
-		                    [placeObj, lat, lng, this.wrapElemSelector, this.locationInput]
+		                    [placeObj, lat, lng, this.wrapElemSelector, this.locationInput, this]
 	                    );
                     }
                 }.bind(this));
 			}else{  // user entered an address
 				$(document).trigger(this.placeChangedTriggerNameSpace,
-					[place, lat, lng, this.wrapElemSelector, this.locationInput]
+					[place, lat, lng, this.wrapElemSelector, this.locationInput, this]
 				);
 			}
 		},
@@ -90,11 +90,11 @@
 			this.addMarkerToMap(lat, lng);
 			if ($.isEmptyObject(this.locationFieldValue)){
 				$(document).trigger(this.markerCreateTriggerNameSpace,
-					[lat, lng, this.wrapElemSelector, this.locationInput]
+					[lat, lng, this.wrapElemSelector, this.locationInput, this]
 				);
 			}else{
 				$(document).trigger(this.markerChangeTriggerNameSpace,
-					[lat, lng, this.wrapElemSelector, this.locationInput]
+					[lat, lng, this.wrapElemSelector, this.locationInput, this]
 				);
 			}
 			
@@ -120,7 +120,8 @@
 						this.locationFieldValue.lat,
 						this.locationFieldValue.lng,
 						this.wrapElemSelector,
-						this.locationInput
+						this.locationInput,
+						this
 					]
 				);
 				this.locationFieldValue = null;
